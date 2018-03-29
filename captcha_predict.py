@@ -6,13 +6,7 @@ import torchvision.transforms as transforms
 from torch.autograd import Variable
 import torchvision.datasets as dsets
 from visdom import Visdom # pip install Visdom
-
-vis = Visdom()
-NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-char_set = NUMBER
-MAX_CAPTCHA = 4
-CHAR_SET_LEN = len(char_set)
+import captcha_setting
 
 class CNN(nn.Module):
     def __init__(self):
@@ -40,7 +34,7 @@ class CNN(nn.Module):
             nn.Dropout(0.5),  # drop 50% of the neuron
             nn.ReLU())
         self.rfc = nn.Sequential(
-            nn.Linear(1024, MAX_CAPTCHA*CHAR_SET_LEN),
+            nn.Linear(1024, captcha_setting.MAX_CAPTCHA * captcha_setting.ALL_CHAR_SET_LEN),
         )
 
     def forward(self, x):
@@ -64,25 +58,20 @@ def main():
 
     pre_loader = torch.utils.data.DataLoader(dataset=pre_dataset,batch_size=1,shuffle=False)
 
-
-    # print(char_set)
-
+    vis = Visdom()
     for images in pre_loader:
         image = images[0]
         # print(image.shape)
         vimage = Variable(image)
         predict_label = cnn(vimage)
-        # c0 = char_set[np.argmax(predict_label[0, 0:36].data.numpy())]
-        # c1 = char_set[np.argmax(predict_label[0, 36:72].data.numpy())]
-        # c2 = char_set[np.argmax(predict_label[0, 72:108].data.numpy())]
-        # c3 = char_set[np.argmax(predict_label[0, 108:144].data.numpy())]
 
-        c0 = char_set[np.argmax(predict_label[0, 0:10].data.numpy())]
-        c1 = char_set[np.argmax(predict_label[0, 10:20].data.numpy())]
-        c2 = char_set[np.argmax(predict_label[0, 20:30].data.numpy())]
-        c3 = char_set[np.argmax(predict_label[0, 30:40].data.numpy())]
+        c0 = captcha_setting.ALL_CHAR_SET[np.argmax(predict_label[0, 0:captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c1 = captcha_setting.ALL_CHAR_SET[np.argmax(predict_label[0, captcha_setting.ALL_CHAR_SET_LEN:2 * captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c2 = captcha_setting.ALL_CHAR_SET[np.argmax(predict_label[0, 2 * captcha_setting.ALL_CHAR_SET_LEN:3 * captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
+        c3 = captcha_setting.ALL_CHAR_SET[np.argmax(predict_label[0, 3 * captcha_setting.ALL_CHAR_SET_LEN:4 * captcha_setting.ALL_CHAR_SET_LEN].data.numpy())]
 
         c = '%s%s%s%s' % (c0, c1, c2, c3)
+        print(c)
         vis.images(image, opts=dict(caption=c))
 
 if __name__ == '__main__':

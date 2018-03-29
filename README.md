@@ -28,6 +28,7 @@
 验证码样例
 =====
 ![](https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number.png)
+![](https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number2.png)
 
 
 快速开始

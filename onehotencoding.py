@@ -1,11 +1,10 @@
 # -*- coding: UTF-8 -*-
 import numpy as np
+import captcha_setting
 
-len = 36
-count = 4
 
 def encode(text):
-    vector = np.zeros(count*len, dtype=float)
+    vector = np.zeros(captcha_gen.CHAR_SET_LEN*captcha_gen.MAX_CAPTCHA, dtype=float)
     def char2pos(c):
         if c =='_':
             k = 62
@@ -19,7 +18,7 @@ def encode(text):
                     raise ValueError('error')
         return k
     for i, c in enumerate(text):
-        idx = i * len + char2pos(c)
+        idx = i * captcha_setting.ALL_CHAR_SET_LEN + char2pos(c)
         vector[idx] = 1.0
     return vector
 
@@ -28,7 +27,7 @@ def decode(vec):
     text=[]
     for i, c in enumerate(char_pos):
         char_at_pos = i #c/63
-        char_idx = c % len
+        char_idx = c % captcha_setting.ALL_CHAR_SET_LEN
         if char_idx < 10:
             char_code = char_idx + ord('0')
         elif char_idx <36:

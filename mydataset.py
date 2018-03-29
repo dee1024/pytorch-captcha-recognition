@@ -5,9 +5,6 @@ import torchvision.transforms as transforms
 from PIL import Image
 import onehotencoding as ohe
 
-MAX_CAPTCHA = 4     # 验证码数字的个数
-CHAR_SET_LEN = 36   # 每个验证码的可能出现的的值：0，1，2，3，4，5，6，7，8，9，一共 10个
-
 class mydataset(Dataset):
 
     def __init__(self, folder, transform=None):
@@ -29,6 +26,6 @@ class mydataset(Dataset):
 def get_data_loader():
     normalize = transforms.Normalize(mean=[0.92206, 0.92206, 0.92206], std=[0.08426, 0.08426, 0.08426])
     transform = transforms.Compose([transforms.ToTensor(),normalize])
-    dataset =  mydataset(transform=transform)
-    return DataLoader(dataset,batch_size=32, shuffle=True)
+    dataset = mydataset(transform=transform)
+    return DataLoader(dataset,batch_size=64, shuffle=True)
 
