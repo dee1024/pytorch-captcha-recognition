@@ -9,7 +9,7 @@ import string
 # string.digits + string.ascii_uppercase
 NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-char_set = NUMBER + ALPHABET
+char_set = NUMBER
 
 def random_captcha(char_set=char_set, captcha_size=4):
     captcha_text = []

@@ -10,7 +10,7 @@ from visdom import Visdom # pip install Visdom
 vis = Visdom()
 NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-char_set = NUMBER + ALPHABET
+char_set = NUMBER
 MAX_CAPTCHA = 4
 CHAR_SET_LEN = len(char_set)
 
@@ -72,10 +72,16 @@ def main():
         # print(image.shape)
         vimage = Variable(image)
         predict_label = cnn(vimage)
-        c0 = char_set[np.argmax(predict_label[0, 0:36].data.numpy())]
-        c1 = char_set[np.argmax(predict_label[0, 36:72].data.numpy())]
-        c2 = char_set[np.argmax(predict_label[0, 72:108].data.numpy())]
-        c3 = char_set[np.argmax(predict_label[0, 108:144].data.numpy())]
+        # c0 = char_set[np.argmax(predict_label[0, 0:36].data.numpy())]
+        # c1 = char_set[np.argmax(predict_label[0, 36:72].data.numpy())]
+        # c2 = char_set[np.argmax(predict_label[0, 72:108].data.numpy())]
+        # c3 = char_set[np.argmax(predict_label[0, 108:144].data.numpy())]
+
+        c0 = char_set[np.argmax(predict_label[0, 0:10].data.numpy())]
+        c1 = char_set[np.argmax(predict_label[0, 10:20].data.numpy())]
+        c2 = char_set[np.argmax(predict_label[0, 20:30].data.numpy())]
+        c3 = char_set[np.argmax(predict_label[0, 30:40].data.numpy())]
+
         c = '%s%s%s%s' % (c0, c1, c2, c3)
         vis.images(image, opts=dict(caption=c))
 
