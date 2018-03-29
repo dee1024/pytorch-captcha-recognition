@@ -5,19 +5,14 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 from torch.autograd import Variable
 import torchvision.datasets as dsets
-import mydataset
-import onehotencoding as ohe
+from visdom import Visdom # pip install Visdom
 
-IMAGE_HEIGHT = 60
-IMAGE_WIDTH = 160
+vis = Visdom()
+NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+char_set = NUMBER + ALPHABET
 MAX_CAPTCHA = 4
-char_set = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 CHAR_SET_LEN = len(char_set)
-
-transform1 = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.92206, 0.92206, 0.92206], std=[0.08426, 0.08426, 0.08426])
-])
 
 class CNN(nn.Module):
     def __init__(self):
@@ -64,20 +59,25 @@ def main():
 
     pre_dataset = dsets.ImageFolder(
         root='dataset/predict',
-        transform=transform1
+        transform=transforms.ToTensor()
     )
 
     pre_loader = torch.utils.data.DataLoader(dataset=pre_dataset,batch_size=1,shuffle=False)
 
+
+    # print(char_set)
+
     for images in pre_loader:
-        images = Variable(images[0])
-        predict_label = cnn(images)
-        c0 = np.argmax(predict_label[0, 0:10].data.numpy())
-        c1 = np.argmax(predict_label[0, 10:20].data.numpy())
-        c2 = np.argmax(predict_label[0, 20:30].data.numpy())
-        c3 = np.argmax(predict_label[0, 30:40].data.numpy())
+        image = images[0]
+        # print(image.shape)
+        vimage = Variable(image)
+        predict_label = cnn(vimage)
+        c0 = char_set[np.argmax(predict_label[0, 0:36].data.numpy())]
+        c1 = char_set[np.argmax(predict_label[0, 36:72].data.numpy())]
+        c2 = char_set[np.argmax(predict_label[0, 72:108].data.numpy())]
+        c3 = char_set[np.argmax(predict_label[0, 108:144].data.numpy())]
         c = '%s%s%s%s' % (c0, c1, c2, c3)
-        print(c)
+        vis.images(image, opts=dict(caption=c))
 
 if __name__ == '__main__':
     main()
