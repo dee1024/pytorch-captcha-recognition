@@ -46,6 +46,13 @@ class CNN(nn.Module):
         out = self.rfc(out)
         return out
 
+transform = transforms.Compose([
+    transforms.Resize(60),
+    # transforms.CenterCrop(20),
+    # transforms.ColorJitter(),
+    # transforms.RandomGrayscale(),
+    transforms.ToTensor()])
+
 def main():
     cnn = CNN()
     cnn.load_state_dict(torch.load('model.pkl'))
@@ -53,7 +60,7 @@ def main():
 
     pre_dataset = dsets.ImageFolder(
         root='dataset/predict',
-        transform=transforms.ToTensor()
+        transform=transform
     )
 
     pre_loader = torch.utils.data.DataLoader(dataset=pre_dataset,batch_size=1,shuffle=False)

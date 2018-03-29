@@ -12,6 +12,7 @@
 - __四位数字 + 大写字符，验证码识别率约 90 %__
 - __深度学习框架pytorch + 验证码生成器ImageCaptcha__
 
+
 原理
 ===
 
@@ -25,8 +26,9 @@
     标记的每个字符都做 one-hot 编码
     批量输入图片集合和标记数据，大概10个Epoch后，准确率已经达到 90% 以上
 
-验证码样例
-=====
+
+验证码识别率展示
+========
 ![](https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number.png)
 ![](https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number2.png)
 

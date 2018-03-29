@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader,Dataset
 import torchvision.transforms as transforms
 from PIL import Image
 import onehotencoding as ohe
+import captcha_setting
 
 class mydataset(Dataset):
 
@@ -24,8 +25,10 @@ class mydataset(Dataset):
         return image, label
 
 def get_data_loader():
-    normalize = transforms.Normalize(mean=[0.92206, 0.92206, 0.92206], std=[0.08426, 0.08426, 0.08426])
-    transform = transforms.Compose([transforms.ToTensor(),normalize])
-    dataset = mydataset(transform=transform)
-    return DataLoader(dataset,batch_size=64, shuffle=True)
+    transform = transforms.Compose([
+        transforms.ColorJitter(),
+        transforms.Grayscale(),
+        transforms.ToTensor()])
+    dataset = mydataset(captcha_setting.TRAIN_DATASET_PATH, transform=transform)
+    return DataLoader(dataset,batch_size=2, shuffle=True)
 

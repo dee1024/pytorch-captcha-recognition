@@ -4,7 +4,7 @@ import captcha_setting
 
 
 def encode(text):
-    vector = np.zeros(captcha_gen.CHAR_SET_LEN*captcha_gen.MAX_CAPTCHA, dtype=float)
+    vector = np.zeros(captcha_setting.ALL_CHAR_SET_LEN * captcha_setting.MAX_CAPTCHA, dtype=float)
     def char2pos(c):
         if c =='_':
             k = 62
