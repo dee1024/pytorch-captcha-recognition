@@ -26,8 +26,8 @@
     批量输入图片集合和标记数据，大概10个Epoch后，准确率已经达到 90% 以上
 
 验证码样例
-========
-
+=====
+![](https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number.png)
 
 
 快速开始
