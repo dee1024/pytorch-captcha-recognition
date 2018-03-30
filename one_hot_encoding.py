@@ -41,3 +41,6 @@ def decode(vec):
         text.append(chr(char_code))
     return "".join(text)
 
+if __name__ == '__main__':
+    e = encode("XKNK")
+    print(e)
