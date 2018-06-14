@@ -21,11 +21,12 @@ def gen_captcha_text_and_image():
 
 if __name__ == '__main__':
     count = 5
-    path = captcha_setting.PREDICT_DATASET_PATH+'/1'
+    path = captcha_setting.TRAIN_DATASET_PATH
     for i in range(count):
+        
         now = str(int(time.time()))
         text, image = gen_captcha_text_and_image()
-        filename = text+'_'+now+'.png'
+        filename = text+'_'+now+str(i)+'.png'
         image.save(path +'/'+ filename)
         print('saved %d : %s' % (i+1,filename))
 
