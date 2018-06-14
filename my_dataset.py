@@ -17,7 +17,7 @@ class mydataset(Dataset):
 
     def __getitem__(self, idx):
         image_root = self.train_image_file_paths[idx]
-        image_name = image_root.split("/")[-1]
+        image_name = image_root.split(os.path.sep)[-1]
         image = Image.open(image_root)
         if self.transform is not None:
             image = self.transform(image)
