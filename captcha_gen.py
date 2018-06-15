@@ -4,6 +4,7 @@ from PIL import Image
 import random
 import time
 import captcha_setting
+import os
 
 def random_captcha():
     captcha_text = []
@@ -21,12 +22,11 @@ def gen_captcha_text_and_image():
 
 if __name__ == '__main__':
     count = 5
-    path = captcha_setting.TRAIN_DATASET_PATH
+    path = captcha_setting.PREDICT_DATASET_PATH+'/1'
     for i in range(count):
-        
         now = str(int(time.time()))
         text, image = gen_captcha_text_and_image()
-        filename = text+'_'+now+str(i)+'.png'
-        image.save(path +'/'+ filename)
+        filename = text+'_'+now+'.png'
+        image.save(path  + os.path.sep +  filename)
         print('saved %d : %s' % (i+1,filename))
 

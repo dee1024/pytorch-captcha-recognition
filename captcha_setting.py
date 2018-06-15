@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-import string
+import os
 # 验证码中的字符
 # string.digits + string.ascii_uppercase
 NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -13,6 +13,6 @@ MAX_CAPTCHA = 4
 IMAGE_HEIGHT = 60
 IMAGE_WIDTH = 160
 
-TRAIN_DATASET_PATH = 'dataset/train'
-TEST_DATASET_PATH = 'dataset/test'
-PREDICT_DATASET_PATH = 'dataset/predict'
+TRAIN_DATASET_PATH = 'dataset' + os.path.sep + 'train'
+TEST_DATASET_PATH = 'dataset' + os.path.sep + 'test'
+PREDICT_DATASET_PATH = 'dataset' + os.path.sep + 'predict'
