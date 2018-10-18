@@ -12,6 +12,7 @@ learning_rate = 0.001
 
 def main():
     cnn = CNN()
+    cnn.train()
     print('init net')
     criterion = nn.MultiLabelSoftMarginLoss()
     optimizer = torch.optim.Adam(cnn.parameters(), lr=learning_rate)

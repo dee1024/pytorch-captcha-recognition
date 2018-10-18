@@ -9,6 +9,7 @@ import one_hot_encoding
 
 def main():
     cnn = CNN()
+    cnn.eval()
     cnn.load_state_dict(torch.load('model.pkl'))
     print("load cnn net.")
 
