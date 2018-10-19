@@ -23,6 +23,8 @@ def gen_captcha_text_and_image():
 if __name__ == '__main__':
     count = 5
     path = captcha_setting.PREDICT_DATASET_PATH+'/1'
+    if not os.path.exists(path):
+        os.makedirs(path)
     for i in range(count):
         now = str(int(time.time()))
         text, image = gen_captcha_text_and_image()
