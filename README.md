@@ -39,6 +39,7 @@
 
     Python2.7+ 、ImageCaptcha库(pip install captcha)、 Pytorch(参考官网http://pytorch.org)
 
+
 - __步骤二：生成验证码__
     ```bash
     python captcha-gen.py
@@ -57,7 +58,7 @@
     ```
     可以在控制台，看到模型的准确率，如 95% ，如果准确率过高，回到步骤一，生成更多的图片集合再次训练
 
-- __步骤五：预测__
+- __步骤五：使用模型做预测__
     ```bash
     python captcha-predict.py
     ```
