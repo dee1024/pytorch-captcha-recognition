@@ -43,7 +43,7 @@
     ```bash
     python captcha-gen.py
     ```
-    执行以上命令，会在目录 dataset/train/ 下生成多张验证码图片，图片已经标注好，数量可以是 1w、5w、10w
+    执行以上命令，会在目录 dataset/train/ 下生成多张验证码图片，图片已经标注好，数量可以是 1w、5w、10w，通过 captcha-gen.py 内的 count 参数设定
     
 - __步骤三：训练模型__
     ```bash
