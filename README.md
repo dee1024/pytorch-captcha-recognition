@@ -45,19 +45,19 @@
     ```
     执行以上命令，会在目录 dataset/train/ 下生成多张验证码图片，图片已经标注好，数量可以是 1w、5w、10w
     
-- __步骤二：训练模型__
+- __步骤三：训练模型__
     ```bash
     python captcha-train.py
     ```
     使用步骤一生成的验证码图集合用CNN模型（在 catcha_cnn_model 中定义）进行训练，训练完成会生成文件 model.pkl
 
-- __步骤三：测试模型__
+- __步骤四：测试模型__
     ```bash
     python captcha-test.py
     ```
     可以在控制台，看到模型的准确率，如 95% ，如果准确率过高，回到步骤一，生成更多的图片集合再次训练
 
-- __步骤四：预测__
+- __步骤五：预测__
     ```bash
     python captcha-predict.py
     ```
