@@ -2,7 +2,7 @@
 import numpy as np
 import torch
 from torch.autograd import Variable
-from visdom import Visdom # pip install Visdom
+#from visdom import Visdom # pip install Visdom
 import captcha_setting
 import my_dataset
 from captcha_cnn_model import CNN
@@ -15,7 +15,7 @@ def main():
 
     predict_dataloader = my_dataset.get_predict_data_loader()
 
-    vis = Visdom()
+    #vis = Visdom()
     for i, (images, labels) in enumerate(predict_dataloader):
         image = images
         vimage = Variable(image)
@@ -28,7 +28,7 @@ def main():
 
         c = '%s%s%s%s' % (c0, c1, c2, c3)
         print(c)
-        vis.images(image, opts=dict(caption=c))
+        #vis.images(image, opts=dict(caption=c))
 
 if __name__ == '__main__':
     main()
