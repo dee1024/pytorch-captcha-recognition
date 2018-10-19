@@ -21,8 +21,8 @@ def gen_captcha_text_and_image():
     return captcha_text, captcha_image
 
 if __name__ == '__main__':
-    count = 5
-    path = captcha_setting.PREDICT_DATASET_PATH+'/1'
+    count = 30
+    path = captcha_setting.TRAIN_DATASET_PATH    #通过改变此处目录，以生成 训练、测试和预测用的验证码集
     if not os.path.exists(path):
         os.makedirs(path)
     for i in range(count):
