@@ -11,9 +11,9 @@ def encode(text):
             return k
         k = ord(c)-48
         if k > 9:
-            k = ord(c) - 55
+            k = ord(c) - 65 + 10
             if k > 35:
-                k = ord(c) - 61
+                k = ord(c) - 97 + 26 + 10
                 if k > 61:
                     raise ValueError('error')
         return k
@@ -33,7 +33,7 @@ def decode(vec):
         elif char_idx <36:
             char_code = char_idx - 10 + ord('A')
         elif char_idx < 62:
-            char_code = char_idx-  36 + ord('a')
+            char_code = char_idx - 36 + ord('a')
         elif char_idx == 62:
             char_code = ord('_')
         else:
@@ -42,5 +42,5 @@ def decode(vec):
     return "".join(text)
 
 if __name__ == '__main__':
-    e = encode("XKNK")
-    print(e)
+    e = encode("BKNK")
+    print(decode(e))
