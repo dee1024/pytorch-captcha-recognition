@@ -42,5 +42,5 @@ def decode(vec):
     return "".join(text)
 
 if __name__ == '__main__':
-    e = encode("BKNK")
+    e = encode("BK7K")
     print(decode(e))
